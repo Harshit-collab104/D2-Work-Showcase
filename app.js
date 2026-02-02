@@ -85,3 +85,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // Attach Scroll Listener
   window.addEventListener('scroll', revealOnScroll);
 });
+
+const magButtons=document.querySelectorAll('.social-links');
+
+magButtons.forEach((btn) =>{
+    btn.addEventListener('mousemove', (e) => {
+      const rect=btn.getBoundingClientRect();
+      
+      const x=e.clientX- rect.left - rect.width/2;
+      const y=e.clientY - rect.top - rect.height/2;
+      btn.style.transform=`translate(${x*0.3}px,${y*0.3}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.tranform=`translate(0px,0px)`;
+  });
+});
+
+document.querySelectorAll(".work-card").forEach((card) => {
+  card.onmousemove = (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
+});
+
+
+let docTitle = document.title;
+window.addEventListener("blur", () => {
+  document.title = "Come back! 🚀";
+});
+window.addEventListener("focus", () => {
+  document.title = docTitle;
+});

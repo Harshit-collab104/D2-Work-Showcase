@@ -213,6 +213,8 @@ body {
   display: flex;
   gap: 1.5rem;
   animation: fadeInUp 0.8s ease-out 0.5s both;
+  transition:transform 0.3s cubic-bezier(0.23,1,0.32,1);
+  will-change:transform ;
 }
 
 .social-links a {
@@ -254,11 +256,43 @@ body {
   animation: floatEffect 8s ease-in-out infinite;
 }
 
+
 @keyframes floatEffect {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-30px) rotate(2deg); }
 }
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 4rem 10%;
+  background: var(--card-bg); /* Glass effect from previous CSS */
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin-top: -2rem; /* Pulls it slightly into the hero for better flow */
+  z-index: 5;
+  position: relative;
+}
 
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  color: var(--subtle-text);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
 /* Sections General */
 .recent-works, .services, .testimonials {
   padding: 10rem 10%;
@@ -504,4 +538,28 @@ body {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+.work-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(0, 242, 255, 0.1),
+    transparent 40%
+  );
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.work-card:hover::after {
+  opacity: 1;
 }
